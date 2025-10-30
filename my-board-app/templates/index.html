@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>간단 게시판</title>
+  </head>
+  <body>
+    <h1>게시글 목록</h1>
+    <a href="{{ url_for('create') }}">새 글 작성</a>
+    <hr />
+
+    {% for post in posts %}
+    <div>
+      <h2>
+        <a href="{{ url_for('detail', post_id=post.id) }}">{{ post.title }}</a>
+      </h2>
+      <p>작성일: {{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+      <hr />
+    </div>
+    {% endfor %} {% if not posts %}
+    <p>게시글이 없습니다. 새로운 글을 작성해 보세요!</p>
+    {% endif %}
+  </body>
+</html>

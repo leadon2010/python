@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ post.title }}</title>
+  </head>
+  <body>
+    <h1>{{ post.title }}</h1>
+    <p>작성일: {{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+    <hr />
+    <div style="white-space: pre-wrap">{{ post.content }}</div>
+    <hr />
+
+    <a href="{{ url_for('edit', post_id=post.id) }}">수정</a>
+
+    <form
+      method="POST"
+      action="{{ url_for('delete', post_id=post.id) }}"
+      style="display: inline"
+    >
+      <input
+        type="submit"
+        value="삭제"
+        onclick="return confirm('정말 삭제하시겠습니까?');"
+      />
+    </form>
+
+    <hr />
+    <a href="{{ url_for('index') }}">목록으로 돌아가기</a>
+  </body>
+</html>

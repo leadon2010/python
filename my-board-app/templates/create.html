@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% if post %}게시글 수정{% else %}새 글 작성{% endif %}</title>
+  </head>
+  <body>
+    <h1>{% if post %}게시글 수정{% else %}새 게시글 작성{% endif %}</h1>
+
+    <form
+      method="POST"
+      action="{% if post %}{{ url_for('edit', post_id=post.id) }}{% else %}{{ url_for('create') }}{% endif %}"
+    >
+      <div>
+        <label for="title">제목:</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value="{% if post %}{{ post.title }}{% endif %}"
+          required
+        />
+      </div>
+      <br />
+      <div>
+        <label for="content">내용:</label>
+        <textarea id="content" name="content" rows="10" required>
+{% if post %}{{ post.content }}{% endif %}</textarea
+        >
+      </div>
+      <br />
+      <button type="submit">
+        {% if post %}수정 완료{% else %}작성 완료{% endif %}
+      </button>
+      <a href="{{ url_for('index') }}">목록으로 돌아가기</a>
+    </form>
+  </body>
+</html>
